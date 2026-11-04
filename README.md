@@ -1,6 +1,6 @@
 # ISYRED · Generador de etiquetas Wi-Fi
 
-Herramienta estática para preparar etiquetas de router de **80 × 60 mm**, con logo ISYRED, QR de conexión, nombre de red y contraseña legibles. HTML, CSS y JavaScript separados, sin compilación ni backend. Dominio previsto: `qr.isyre.com`; despliegue pendiente de revisión local.
+Herramienta estática para preparar etiquetas de router de **80 × 60 mm**, con logo ISYRED, QR de conexión, nombre de red y contraseña legibles. HTML, CSS y JavaScript separados, sin compilación ni backend. Dominio previsto: `qr.isyre.com`. Prueba local aprobada por Tirso el 3 de noviembre de 2026; publicación mediante GitHub y configuración del dominio a cargo de Tirso.
 
 ## Probar localmente
 
@@ -47,6 +47,8 @@ node --test tests/wifi.test.cjs
 Revisión manual: generación, cambio de credenciales, contraseña inválida, SSID Unicode y con `; , : " \\`, red abierta/oculta, limpiar datos, descarga PNG, impresión, pantallas pequeñas y lectura en teléfonos reales. No usar credenciales de clientes como datos de prueba.
 
 ## Publicación posterior
+
+La versión local fue probada y aprobada por Tirso el 3 de noviembre de 2026. Se acordó conservar la versión aprobada en `dev` y promoverla a `main` para que Tirso realice la publicación y configure el subdominio.
 
 Servir `index.html`, `css/`, `js/`, `assets/` y `vendor/` desde cualquier hosting estático con HTTPS. No se requieren secretos ni variables de entorno. Excluir `.git/`, pruebas y archivos de trabajo. Configurar DNS y TLS para `qr.isyre.com` en el proveedor elegido después de aprobar la prueba local. No se ha añadido despliegue automático.
 
