@@ -435,3 +435,15 @@ footer {
 
 }
 
+/* Quitar del flujo todo lo ajeno a la etiqueta evita páginas vacías al imprimir. */
+@media print {
+  body * {
+    display: none !important;
+  }
+  body > main, .workspace, .preview-panel, .preview-stage {
+    display: contents !important;
+  }
+  #label-canvas {
+    display: block !important;
+  }
+}
