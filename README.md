@@ -46,10 +46,65 @@ node --test tests/wifi.test.cjs
 
 Revisión manual: generación, cambio de credenciales, contraseña inválida, SSID Unicode y con `; , : " \\`, red abierta/oculta, limpiar datos, descarga PNG, impresión, pantallas pequeñas y lectura en teléfonos reales. No usar credenciales de clientes como datos de prueba.
 
-## Publicación posterior
+## Publicación con GitHub Pages
 
-La versión local fue probada y aprobada por Tirso el 3 de noviembre de 2026. Se acordó conservar la versión aprobada en `dev` y promoverla a `main` para que Tirso realice la publicación y configure el subdominio.
+La versión local fue probada y aprobada por Tirso el 3 de noviembre de 2026. Los cambios se preparan en `dev` y se promueven a `main`, que es la rama de publicación. Dominio acordado: `qr.isyre.com` (sin la «d»).
 
-Servir `index.html`, `css/`, `js/`, `assets/` y `vendor/` desde cualquier hosting estático con HTTPS. No se requieren secretos ni variables de entorno. Excluir `.git/`, pruebas y archivos de trabajo. Configurar DNS y TLS para `qr.isyre.com` en el proveedor elegido después de aprobar la prueba local. No se ha añadido despliegue automático.
+### 1. Seleccionar la fuente de publicación
 
-La restricción `connect-src 'none'` impide solicitudes de datos desde scripts. Al publicar, conviene enviar también cabeceras HTTP `Content-Security-Policy`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer` y una política CSP `frame-ancestors 'none'` (esta última requiere cabecera HTTP). El acceso restringido al equipo, si se desea, se configura en el hosting.
+En el repositorio [qr-generator → Settings → Pages](https://github.com/comoreyes13/qr-generator/settings/pages), configurar **Build and deployment**:
+
+| Campo | Valor |
+| --- | --- |
+| Source | `Deploy from a branch` |
+| Branch | `main` |
+| Folder | `/ (root)` |
+
+Pulsar **Save**. No hace falta agregar un framework, tema o proceso de compilación. GitHub Pages publica los cambios que lleguen a `main`; subir sólo a `dev` no actualiza el sitio. El estado de la ejecución puede revisarse en la pestaña **Actions** del repositorio.
+
+### 2. Registrar el dominio en GitHub
+
+En **Custom domain**, escribir únicamente `qr.isyre.com`, sin `https://` ni rutas, y pulsar **Save**.
+
+Al publicar desde una rama, GitHub crea un commit con el archivo `CNAME` en la raíz de esa rama. Su contenido debe ser:
+
+```text
+qr.isyre.com
+```
+
+Conservar ese archivo y traer el commit remoto a la copia local y a `dev` antes de continuar trabajando; no sobrescribir el cambio generado por GitHub.
+
+### 3. Crear el registro DNS del subdominio
+
+En el panel del proveedor que administra actualmente los DNS de `isyre.com`, agregar:
+
+| Campo | Valor |
+| --- | --- |
+| Tipo | `CNAME` |
+| Nombre / Host | `qr` |
+| Destino / Valor | `comoreyes13.github.io` |
+| TTL | Predeterminado del proveedor |
+
+Algunos paneles solicitan el nombre completo `qr.isyre.com` en lugar de `qr`; revisar cómo muestra el proveedor el nombre final. El destino no lleva `https://`, `/qr-generator` ni otra ruta. El registro DNS `CNAME` y el archivo `CNAME` del repositorio son dos configuraciones distintas; ambas deben estar correctas.
+
+No modificar los registros del dominio raíz, correo u otros subdominios. Si ya existe un registro para `qr`, revisar su uso antes de sustituirlo; un `CNAME` no debe coexistir con otros tipos de registro en ese mismo nombre.
+
+### 4. Esperar la validación y activar HTTPS
+
+Volver a **Settings → Pages** y esperar a que GitHub valide el DNS y emita el certificado. Un aviso inicial de comprobación pendiente o fallida puede deberse a la propagación del DNS; si persiste, revisar el nombre y destino del registro.
+
+Cuando esté disponible, activar **Enforce HTTPS**. Después abrir [https://qr.isyre.com](https://qr.isyre.com), generar una etiqueta con datos ficticios y comprobar la descarga y la lectura del QR. Configurar el dominio no prueba por sí solo que el sitio ya esté disponible.
+
+Si aparece un error 404, revisar que la publicación de **Actions** haya terminado correctamente, que la fuente sea `main` + `/ (root)` y que `index.html` permanezca en la raíz. Si falla HTTPS, revisar primero la validación DNS y el estado del certificado en Pages.
+
+### Referencias oficiales
+
+- [Configurar la fuente de publicación de GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+- [Configurar un dominio personalizado y un subdominio](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-a-subdomain).
+- [Solucionar problemas de dominios personalizados](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages).
+
+### Consideraciones del hosting
+
+La aplicación no requiere secretos, variables de entorno ni backend. No guardar credenciales de redes o datos de clientes en el repositorio. No se ha agregado un flujo de despliegue personalizado; Pages gestiona la publicación desde la rama seleccionada.
+
+La restricción `connect-src 'none'` impide solicitudes de datos desde scripts. La CSP incluida en el HTML funciona sin configuración adicional. Si en el futuro se utiliza un hosting con control de cabeceras HTTP, se pueden agregar `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer` y CSP `frame-ancestors 'none'`; GitHub Pages no permite configurar directamente cabeceras HTTP personalizadas. La publicación estándar de Pages no restringe el acceso al equipo: conocer la URL permite abrir la herramienta, aunque las credenciales introducidas se procesan en el navegador.
