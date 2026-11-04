@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Generador local de etiquetas Wi-Fi para el equipo ISYRED.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>ISYRED · Generador Wi-Fi</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="vendor/qrcode.js"></script>
+  <script defer src="vendor/qrcode_UTF8.js"></script>
+  <script defer src="js/wifi.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="./" aria-label="ISYRED, inicio"><img src="assets/isyred-logo.jpeg" alt="ISYRED"></a><span class="team">HERRAMIENTAS DEL EQUIPO</span><span class="local-badge">● &nbsp; Generación privada</span></header>
+  <main>
+    <div class="intro"><span class="eyebrow">UNA MEJOR BIENVENIDA</span><h1>Tu Wi-Fi, a un escaneo.</h1><p>Prepara la etiqueta del router. Conectar al cliente es así de sencillo.</p></div>
+    <div class="workspace">
+      <section class="panel" aria-labelledby="form-title">
+        <div class="section-heading"><span class="step">01</span><div><h2 id="form-title">Configura la red</h2><p>Usa los datos configurados en el router.</p></div></div>
+        <form id="wifi-form" autocomplete="off">
+          <label for="ssid">Nombre de la red Wi-Fi <span>(SSID)</span></label>
+          <input id="ssid" name="ssid" required placeholder="Ej. ISYRED-Casa" spellcheck="false" autocomplete="off" aria-describedby="ssid-help">
+          <small id="ssid-help">Hasta 32 bytes. Respeta espacios y mayúsculas.</small>
+          <label for="security">Seguridad</label>
+          <select id="security" name="security"><option value="WPA">WPA / WPA2 Personal</option><option value="nopass">Red abierta (sin contraseña)</option></select>
+          <label for="password">Contraseña de la red</label>
+          <div class="password-field"><input id="password" name="password" type="password" required autocomplete="new-password" spellcheck="false" aria-describedby="password-help"><button id="toggle-password" type="button" aria-controls="password" aria-pressed="false">Mostrar</button></div>
+          <small id="password-help">Entre 8 y 63 caracteres ASCII, o 64 dígitos hexadecimales.</small>
+          <label class="checkbox"><input id="hidden" type="checkbox"> La red está oculta</label>
+          <button class="primary" type="submit">Generar etiqueta <span aria-hidden="true">↗</span></button>
+          <button id="clear" class="text-button" type="button">Limpiar datos</button>
+          <p id="status" class="status" role="status" aria-live="polite">Completa los datos para comenzar.</p>
+        </form>
+        <div class="privacy"><span aria-hidden="true">◈</span><p><strong>Los datos se quedan en este navegador.</strong><br>No enviamos ni guardamos nombres de red o contraseñas.</p></div>
+      </section>
+      <section class="preview-panel" aria-labelledby="preview-title">
+        <div class="section-heading"><span class="step">02</span><div><h2 id="preview-title">Lista para conectar</h2><p>Vista previa de la etiqueta · 80 × 60 mm</p></div></div>
+        <div class="preview-stage"><div id="placeholder"><div class="placeholder-symbol" aria-hidden="true">⌘</div><strong>Aquí aparecerá tu etiqueta</strong><p>Genera el QR para descargarlo o imprimirlo.</p></div><canvas id="label-canvas" width="1600" height="1200" hidden aria-label="Etiqueta con QR de conexión, nombre de red y contraseña"></canvas></div>
+        <div class="actions"><button id="download" class="primary" disabled>Descargar PNG <span aria-hidden="true">↓</span></button><button id="print" class="secondary" disabled>Imprimir etiqueta</button></div>
+        <p class="preview-note">Escanea con la cámara del teléfono y acepta conectarte a la red.<br>Comprueba la lectura antes de pegar la etiqueta.</p>
+      </section>
+    </div>
+    <footer><span>ISYRED <span class="footer-dot">/</span> Tu conexión, nuestra prioridad.</span><span>Hecho para conectar.</span></footer>
+  </main>
+  <noscript>Activa JavaScript para generar códigos QR en tu navegador.</noscript>
+</body>
+</html>

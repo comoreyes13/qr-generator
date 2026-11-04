@@ -1,0 +1,437 @@
+/* Identidad y base: tipografía del sistema, sin fuentes ni recursos externos. */
+:root {
+  font-family: Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color: #142d4b;
+  background: #f5f8fb;
+  font-synthesis: none;
+  --blue: #064cb5;
+  --muted: #66778a;
+  --line: #dde5ed;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.topbar {
+  height: 96px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: white;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: block;
+  width: 145px;
+  height: 66px;
+  overflow: hidden;
+}
+
+.brand img {
+  width: 145px;
+  height: 145px;
+  object-fit: contain;
+  transform: translateY(-39px);
+}
+
+.team {
+  font-size: 11px;
+  letter-spacing: 1.7px;
+  color: var(--muted);
+  border-left: 1px solid var(--line);
+  padding-left: 28px;
+}
+
+.local-badge {
+  margin-left: auto;
+  font-size: 12px;
+  color: #33774a;
+  background: #edf7ee;
+  padding: 9px 13px;
+  border-radius: 30px;
+}
+
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 54px 32px 20px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 750;
+  color: #16817b;
+}
+
+h1 {
+  font-size: clamp(30px,4vw,46px);
+  letter-spacing: -1.8px;
+  margin: 13px 0 14px;
+  line-height: 1.15;
+}
+
+.intro>p {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0 0 38px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 28px;
+}
+
+.panel,.preview-panel {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 30px;
+  background: #fff;
+}
+
+.section-heading {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 26px;
+}
+
+.step {
+  font-size: 12px;
+  font-weight: 750;
+  background: #edf4fc;
+  color: var(--blue);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+h2 {
+  margin: 0;
+  font-size: 19px;
+  letter-spacing: -.4px;
+}
+
+.section-heading p {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 7px 0 0;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 650;
+  margin: 22px 0 9px;
+}
+
+label span {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+input,select,button {
+  font: inherit;
+}
+
+input:not([type=checkbox]),select {
+  width: 100%;
+  height: 46px;
+  border: 1px solid #cdd8e3;
+  border-radius: 8px;
+  padding: 0 13px;
+  color: #142d4b;
+  background: #fff;
+  font-size: 14px;
+}
+
+input::placeholder {
+  color: #8b98a8;
+}
+
+small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  font-size: 13px;
+  font-weight: 650;
+  border-radius: 8px;
+  min-height: 44px;
+  padding: 12px 16px;
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+  filter: brightness(.94);
+}
+
+:focus-visible {
+  outline: 3px solid #22a6cd;
+  outline-offset: 3px;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 85px;
+}
+
+.password-field button {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  height: 42px;
+  min-height: 0;
+  background: transparent;
+  font-size: 11px;
+  color: var(--blue);
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+  margin: 22px 0;
+}
+
+.checkbox input {
+  accent-color: var(--blue);
+  width: 16px;
+  height: 16px;
+}
+
+.primary {
+  background: var(--blue);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+
+form>.primary {
+  width: 100%;
+}
+
+.text-button {
+  display: block;
+  margin: 5px auto;
+  background: transparent;
+  color: var(--muted);
+}
+
+.status {
+  min-height: 20px;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--muted);
+}
+
+.status.error {
+  color: #b12b34;
+}
+
+.privacy {
+  border-top: 1px solid var(--line);
+  margin-top: 20px;
+  padding-top: 17px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #27836d;
+}
+
+.privacy p {
+  font-size: 11px;
+  line-height: 1.7;
+  margin: 0;
+  color: var(--muted);
+}
+
+.privacy strong {
+  color: #456071;
+  font-weight: 600;
+}
+
+.preview-panel {
+  background: #fbfcfe;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-stage {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  min-height: 340px;
+  background: #edf2f7;
+  border: 1px dashed #cedae5;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+#placeholder {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+#placeholder p {
+  font-size: 12px;
+  max-width: 240px;
+  line-height: 1.7;
+}
+
+.placeholder-symbol {
+  font-size: 60px;
+  color: #b4c7da;
+  margin-bottom: 20px;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
+  background: white;
+  box-shadow: 0 8px 25px #18375b12;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.secondary {
+  border: 1px solid #cbd7e4;
+  background: #fff;
+  color: var(--blue);
+}
+
+.preview-note {
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin: 20px 0 0;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  padding: 29px 0;
+}
+
+.footer-dot {
+  padding: 0 10px;
+  color: #20a3b5;
+}
+
+[hidden] {
+  display: none!important;
+}
+
+/* En móvil se conserva el orden: captura, vista previa y exportación. */
+@media(max-width:760px) {
+  .topbar {
+    padding: 0 22px;
+    height: 82px;
+  }
+
+  .team {
+    display: none;
+  }
+
+  .local-badge {
+    font-size: 10px;
+  }
+
+  main {
+    padding: 34px 18px 14px;
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .panel,.preview-panel {
+    padding: 23px;
+  }
+
+  .preview-stage {
+    min-height: 270px;
+  }
+
+  footer {
+    gap: 20px;
+    line-height: 1.7;
+  }
+
+  footer>span:last-child {
+    display: none;
+  }
+
+}
+
+/* El canvas es también la fuente de impresión: no se imprimen formularios. */
+@page {
+  size: 80mm 60mm;
+  margin: 0;
+}
+
+@media print {
+  html,body {
+    width: 80mm;
+    height: 60mm;
+    background: white;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #label-canvas {
+    visibility: visible;
+    display: block!important;
+    position: fixed;
+    inset: 0;
+    width: 80mm;
+    height: 60mm;
+    max-width: none;
+    box-shadow: none;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  header,footer,noscript {
+    display: none;
+  }
+
+}
+
